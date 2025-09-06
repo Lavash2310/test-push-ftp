@@ -68,16 +68,16 @@
     <h3>Завдання 5.</h3>
     <script language="JavaScript">
         function calc() {
-            let a, b, sum = 0.0, i = 0, cur = 0.0;
-            a = parseFloat(main_form5.t_a.value);
-            b = parseFloat(main_form5.t_b.value);
+            let x, y, sum = 0.0, i = 0, cur = 0.0;
+            x = parseFloat(main_form5.t_x.value);
+            y = parseFloat(main_form5.t_y.value);
             sum = 0.0;
             for (i = 2; i <= 7; i++) {
                 let fact_i = 1;
                 for (let j = 1; j <= i; j++) fact_i *= j;
                 let fact_ip2 = fact_i;
                 for (let j = i + 1; j <= i + 2; j++) fact_ip2 *= j;
-                cur = Math.pow(-1, i) * ((fact_i - 2 * a * b) / fact_ip2);
+                cur = Math.pow(-1, i) * ((fact_i - 2 * x * y) / fact_ip2);
                 sum += cur;
             }
             main_form5.t_c.value = "" + sum;
@@ -86,8 +86,8 @@
 
     <img src="./img/task5.png" alt="task5">
     <form id="main_form5">
-        a=<input type="text" id="t_a" name="t_a" value="1"><br>
-        b=<input type="text" id="t_b" name="t_b" value="1"><br>
+        x=<input type="text" id="t_x" name="t_x" value="1"><br>
+        y=<input type="text" id="t_y" name="t_y" value="1"><br>
         Результат:<input type="text" id="t_c" name="t_c" value=""><br>
         <input type="button" onClick="calc();" value="Розрахувати">
     </form>
