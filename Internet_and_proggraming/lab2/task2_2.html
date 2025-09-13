@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <h2><a href="./lab2.html">Назад до меню меню лаборатної роботи</a></h2>
+
+    <div class="calculator">
+        <input type="text" id="display" class="display" readonly>
+
+        <div class="buttons">
+            <button class="btn btn-clear" onclick="clearDisplay()">C</button>
+            <button class="btn btn-clear" onclick="deleteLast()">←</button>
+            <button class="btn btn-operator" onclick="addToDisplay('/')">/</button>
+            <button class="btn btn-operator" onclick="addToDisplay('*')">×</button>
+
+            <button class="btn" onclick="addToDisplay('7')">7</button>
+            <button class="btn" onclick="addToDisplay('8')">8</button>
+            <button class="btn" onclick="addToDisplay('9')">9</button>
+            <button class="btn btn-operator" onclick="addToDisplay('-')">-</button>
+
+            <button class="btn" onclick="addToDisplay('4')">4</button>
+            <button class="btn" onclick="addToDisplay('5')">5</button>
+            <button class="btn" onclick="addToDisplay('6')">6</button>
+            <button class="btn btn-operator" onclick="addToDisplay('+')">+</button>
+
+            <button class="btn" onclick="addToDisplay('1')">1</button>
+            <button class="btn" onclick="addToDisplay('2')">2</button>
+            <button class="btn" onclick="addToDisplay('3')">3</button>
+            <button class="btn btn-equals" onclick="calculate()" rowspan="2">=</button>
+
+            <button class="btn" onclick="addToDisplay('0')" style="grid-column: span 2;">0</button>
+            <button class="btn" onclick="addToDisplay('.')">.</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+
+        function addToDisplay(value) {
+            if (value === '*') {
+                display.value += '*';
+            } else {
+                display.value += value;
+            }
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function deleteLast() {
+            display.value = display.value.slice(0, -1);
+        }
+
+        function calculate() {
+            try {
+                if (display.value === '') {
+                    return;
+                }
+
+                let expression = display.value.replace(/×/g, '*');
+
+                let result = eval(expression);
+
+                if (isNaN(result) || !isFinite(result)) {
+                    display.value = 'Помилка';
+                } else {
+                    display.value = result;
+                }
+            } catch (error) {
+                display.value = 'Помилка';
+            }
+        }
+    </script>
+</body>
+
+</html>

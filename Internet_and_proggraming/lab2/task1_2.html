@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body onLoad="startClock()">
+    <h2><a href="./lab2.html">Назад до меню меню лаборатної роботи</a></h2>
+    <div class="clock-container">
+        <h1 class="clock-title">Годинник</h1>
+
+        <div class="time-display" id="timeDisplay">--/--/--</div>
+        <div class="separator">+</div>
+        <div class="date-display" id="dateDisplay">----*--*--</div>
+
+        <div class="format-info">
+            Формат: hour/min/sec + year*month*day
+        </div>
+    </div>
+
+    <script>
+        let timer;
+
+        function startClock() {
+            updateClock();
+            timer = setInterval(updateClock, 1000);
+        }
+
+        function updateClock() {
+            const now = new Date();
+
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const day = now.getDate();
+
+            let timeStr = hours;
+            timeStr += (minutes < 10 ? "/0" : "/") + minutes;
+            timeStr += (seconds < 10 ? "/0" : "/") + seconds;
+
+            let dateStr = year;
+            dateStr += (month < 10 ? "*0" : "*") + month;
+            dateStr += (day < 10 ? "*0" : "*") + day;
+
+            document.getElementById('timeDisplay').textContent = timeStr;
+            document.getElementById('dateDisplay').textContent = dateStr;
+        }
+
+        window.addEventListener('beforeunload', function () {
+            if (timer) {
+                clearInterval(timer);
+            }
+        });
+    </script>
+</body>
+
+</html>
