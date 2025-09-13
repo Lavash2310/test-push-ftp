@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h2><a href="./lab2.html">Назад до меню меню лаборатної роботи</a></h2>
+    <p>
+        Кількість рядків: <input type="number" id="rows" value="3" min="1" max="8">
+        Кількість стовпців: <input type="number" id="cols" value="3" min="1" max="8">
+        <button onclick="createTable()">Створити таблицю</button>
+    </p>
+
+    <p>Формула: A(i,j) = 2j + i</p>
+
+    <div id="tableDiv"></div>
+
+    <button onclick="calculateSum()">Обчислити суму всіх елементів</button>
+
+    <div id="result" class="result"></div>
+
+    <script>
+        let array = [];
+
+        function createTable() {
+            let rows = parseInt(document.getElementById('rows').value);
+            let cols = parseInt(document.getElementById('cols').value);
+
+            array = [];
+            let html = '<table>';
+
+            for (let i = 1; i <= rows; i++) {
+                html += '<tr>';
+                array[i] = [];
+
+                for (let j = 1; j <= cols; j++) {
+                    let value = 2 * j + i;
+                    array[i][j] = value;
+                    html += `<td><input type="number" value="${value}" onchange="array[${i}][${j}] = this.value"></td>`;
+                }
+                html += '</tr>';
+            }
+            html += '</table>';
+
+            document.getElementById('tableDiv').innerHTML = html;
+            document.getElementById('result').innerHTML = '';
+        }
+
+        function calculateSum() {
+            let sum = 0;
+
+            for (let i = 1; i < array.length; i++) {
+                for (let j = 1; j < array[i].length; j++) {
+                    sum += parseFloat(array[i][j]) || 0;
+                }
+            }
+
+            document.getElementById('result').innerHTML = `Сума всіх елементів: ${sum}`;
+        }
+
+        createTable();
+    </script>
+</body>
+
+</html>

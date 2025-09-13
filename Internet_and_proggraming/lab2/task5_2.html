@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 5</title>
+</head>
+
+<body>
+    <h2><a href="./lab2.html">Назад до меню меню лаборатної роботи</a></h2>
+    <button onclick="runAll()">Запустити всі тести</button>
+    <button onclick="console.clear()">Очистити Console</button>
+
+    <hr>
+
+    <h2>1. console.info()</h2>
+    <p>Інформаційне повідомлення</p>
+    <button onclick="test1()">Тест console.info()</button>
+
+    <h2>2. console.warn()</h2>
+    <p>Попередження (жовтий колір)</p>
+    <button onclick="test2()">Тест console.warn()</button>
+
+    <h2>3. console.error()</h2>
+    <p>Помилка (червоний колір)</p>
+    <button onclick="test3()">Тест console.error()</button>
+
+    <h2>4. console.dir()</h2>
+    <p>Показує об'єкт як список властивостей</p>
+    <button onclick="test4()">Тест console.dir()</button>
+
+    <h2>5. console.dirxml()</h2>
+    <p>Показує HTML елемент як дерево</p>
+    <button onclick="test5()">Тест console.dirxml()</button>
+
+    <h2>6. console.time() / timeEnd()</h2>
+    <p>Вимірює час виконання</p>
+    <button onclick="test6()">Тест часу</button>
+
+    <h2>7. console.profile() / profileEnd()</h2>
+    <p>Профайлер коду</p>
+    <button onclick="test7()">Тест профайлера</button>
+
+    <h2>8. console.assert()</h2>
+    <p>Показує помилку якщо умова false</p>
+    <button onclick="test8()">Тест console.assert()</button>
+
+    <script>
+        function test1() {
+            console.log("=== console.info() ===");
+            console.info("Інформаційне повідомлення");
+            console.info("Користувач:", { name: "Іван", age: 25 });
+        }
+
+        function test2() {
+            console.log("=== console.warn() ===");
+            console.warn("Це попередження!");
+        }
+
+        function test3() {
+            console.log("=== console.error() ===");
+            console.error("Це помилка!");
+            console.error("Критична помилка:", new Error("Щось не так"));
+        }
+
+        function test4() {
+            console.log("=== console.dir() ===");
+            let obj = { name: "Іван", age: 25, skills: ["JS", "HTML"] };
+            console.log("Звичайний log:");
+            console.log(obj);
+            console.log("Тепер dir:");
+            console.dir(obj);
+        }
+
+        function test5() {
+            console.log("=== console.dirxml() ===");
+            console.dirxml(document.body);
+            console.dirxml(document.querySelector('h1'));
+        }
+
+        function test6() {
+            console.log("=== console.time() ===");
+            console.time("тест швидкості");
+
+            for (let i = 0; i < 100000; i++) {
+                Math.sqrt(i);
+            }
+
+            console.timeEnd("тест швидкості");
+        }
+
+        function test7() {
+            console.log("=== console.profile() ===");
+
+            if (console.profile) {
+                console.profile("MyProfile");
+
+                for (let i = 0; i < 50000; i++) {
+                    Math.random();
+                }
+
+                console.profileEnd("MyProfile");
+                console.log("Профайл створено");
+            } else {
+                console.warn("Профайлер не підтримується");
+            }
+        }
+
+        function test8() {
+            console.log("=== console.assert() ===");
+            console.assert(true, "Це не покажеться");
+            console.assert(false, "Це помилка!");
+            console.assert(5 > 10, "5 не більше за 10");
+            console.assert(2 + 2 === 4, "Математика працює");
+        }
+
+        function runAll() {
+            console.clear();
+            console.log("🚀 ПОЧАТОК ВСІХ ТЕСТІВ");
+            test1();
+            test2();
+            test3();
+            test4();
+            test5();
+            test6();
+            test7();
+            test8();
+            console.log("✅ ТЕСТИ ЗАВЕРШЕНО");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 4</title>
+</head>
+
+<body>
+    <h2><a href="./lab2.html">Назад до меню меню лаборатної роботи</a></h2>
+
+    <div class="container">
+        <h1>Тести console.log()</h1>
+
+        <div style="text-align: center; margin: 20px 0;">
+            <input type="number" id="num1" value="15" placeholder="Число 1">
+            <input type="number" id="num2" value="4" placeholder="Число 2">
+            <button onclick="runAll()">Запустити всі тести</button>
+        </div>
+
+        <div class="test-section">
+            <h3>1. Остача від ділення</h3>
+            <div class="code">let remainder = a % b;<br>console.log("Остача:", remainder);</div>
+            <button onclick="test1()">Тест 1</button>
+        </div>
+
+        <div class="test-section">
+            <h3>2. Логічне значення (true/false)</h3>
+            <div class="code">let isZero = (a % b === 0);<br>console.log("Ділиться націло:", isZero);</div>
+            <button onclick="test2()">Тест 2</button>
+        </div>
+
+        <div class="test-section">
+            <h3>3. Керуючі послідовності %d, %s</h3>
+            <div class="code">let arr = [10, 20, 30];<br>console.log("Числа: %d, %d, %d", arr[0], arr[1],
+                arr[2]);<br>console.log("Як рядки: %s", arr[0]);<br>console.log("Число %d і рядок %s", 42,
+                "Привіт");</div>
+            <button onclick="test3()">Тест 3</button>
+        </div>
+    </div>
+    <script>
+        function test1() {
+            let a = parseInt(document.getElementById('num1').value);
+            let b = parseInt(document.getElementById('num2').value);
+
+            console.log("=== ТЕСТ 1: Остача від ділення ===");
+            let remainder = a % b;
+            console.log(a + " % " + b + " = " + remainder);
+            console.log("Остача:", remainder);
+        }
+
+        function test2() {
+            let a = parseInt(document.getElementById('num1').value);
+            let b = parseInt(document.getElementById('num2').value);
+
+            console.log("=== ТЕСТ 2: Логічне значення ===");
+            let remainder = a % b;
+            let isZero = (remainder === 0);
+            console.log("Ділиться націло:", isZero);
+        }
+
+        function test3() {
+            console.log("=== ТЕСТ 3: Керуючі послідовності ===");
+            let arr = [10, 20, 30];
+            console.log("Значення масиву: %d, %d, %d", arr[0], arr[1], arr[2]);
+            console.log("Перший елемент як рядок: %s", arr[0]);
+            console.log("Число %d і рядок %s", 42, "Привіт");
+        }
+
+        function runAll() {
+            console.clear();
+            console.log("🚀 ПОЧАТОК ТЕСТІВ");
+            test1();
+            test2();
+            test3();
+            console.log("✅ ТЕСТИ ЗАВЕРШЕНО");
+        }
+    </script>
+</body>
+
+</html>
