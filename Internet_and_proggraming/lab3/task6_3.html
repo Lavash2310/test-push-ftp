@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 6</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <h2><a href="./lab3.html">Назад до меню лаборатної роботи</a></h2>
+
+    <div class="tree">
+        <div class="category" onclick="toggle('fruits')">fruits</div>
+        <div id="fruits" class="items">
+            <div class="item">apple</div>
+            <div class="item">pineapple</div>
+            <div class="item">appricot</div>
+            <div class="item">pear</div>
+            <div class="item">lemon</div>
+        </div>
+
+        <div class="category" onclick="toggle('vegetables')">vegetables</div>
+        <div id="vegetables" class="items">
+            <div class="item">potatoes</div>
+            <div class="item">beetroot</div>
+            <div class="item">carrots</div>
+            <div class="item">pear</div>
+        </div>
+    </div>
+
+    <script>
+        function toggle(categoryId) {
+            const items = document.getElementById(categoryId);
+            if (items.classList.contains('hidden')) {
+                items.classList.remove('hidden');
+            } else {
+                items.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+
+</html>

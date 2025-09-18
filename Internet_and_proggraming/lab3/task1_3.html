@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="utf-8">
+    <title>Завдання 1</title>
+</head>
+
+<body>
+    <h2><a href="./lab3.html">Назад до меню меню лаборатної роботи</a></h2>
+
+    <select id="formulaSelect">
+        <option value="base-height">Через сторону та висоту</option>
+        <option value="three-sides">Формула Герона</option>
+        <option value="two-sides-angle">Через 2 сторони і кут</option>
+        <option value="circumradius">Через 3 сторони і R</option>
+        <option value="inradius">Півпериметр і r</option>
+    </select>
+
+    <div id="base-height-inputs">
+        <input id="base" type="number" placeholder="a (см)" step="0.1" min="0">
+        <input id="height" type="number" placeholder="h (см)" step="0.1" min="0">
+    </div>
+
+    <div id="three-sides-inputs" hidden>
+        <input id="sideA" type="number" placeholder="a (см)" step="0.1" min="0">
+        <input id="sideB" type="number" placeholder="b (см)" step="0.1" min="0">
+        <input id="sideC" type="number" placeholder="c (см)" step="0.1" min="0">
+    </div>
+
+    <div id="two-sides-angle-inputs" hidden>
+        <input id="sideA2" type="number" placeholder="a (см)" step="0.1" min="0">
+        <input id="sideB2" type="number" placeholder="b (см)" step="0.1" min="0">
+        <input id="angle" type="number" placeholder="γ (град)" min="0" max="180">
+    </div>
+
+    <div id="circumradius-inputs" hidden>
+        <input id="sideA3" type="number" placeholder="a (см)" step="0.1" min="0">
+        <input id="sideB3" type="number" placeholder="b (см)" step="0.1" min="0">
+        <input id="sideC3" type="number" placeholder="c (см)" step="0.1" min="0">
+        <input id="circumradius" type="number" placeholder="R (см)" step="0.1" min="0">
+    </div>
+
+    <div id="inradius-inputs" hidden>
+        <input id="sideA4" type="number" placeholder="a (см)" step="0.1" min="0">
+        <input id="sideB4" type="number" placeholder="b (см)" step="0.1" min="0">
+        <input id="sideC4" type="number" placeholder="c (см)" step="0.1" min="0">
+        <input id="inradius" type="number" placeholder="r (см)" step="0.1" min="0">
+    </div>
+
+    <div>Площа: <span id="resultValue">0</span> см^2</div>
+
+    <script>
+        const formulaSelect = document.getElementById('formulaSelect');
+        const resultValue = document.getElementById('resultValue');
+        function showInputs(f) {
+            document.querySelectorAll('div[id$="-inputs"]').forEach(d => d.hidden = true);
+            document.getElementById(f + '-inputs').hidden = false
+        }
+        function calculate() {
+            let area = 0;
+            if (formulaSelect.value === 'base-height') {
+                const a = +document.getElementById('base').value || 0;
+                const h = +document.getElementById('height').value || 0;
+                area = (a * h) / 2
+            }
+            else if (formulaSelect.value === 'three-sides') {
+                const a = +document.getElementById('sideA').value || 0,
+                    b = +document.getElementById('sideB').value || 0,
+                    c = +document.getElementById('sideC').value || 0;
+                if (a + b > c && a + c > b && b + c > a && a > 0 && b > 0 && c > 0) {
+                    const p = (a + b + c) / 2;
+                    area = Math.sqrt(p * (p - a) * (p - b) * (p - c))
+                } else area = 0
+            }
+            else if (formulaSelect.value === 'two-sides-angle') {
+                const a = +document.getElementById('sideA2').value || 0,
+                    b = +document.getElementById('sideB2').value || 0,
+                    ang = +document.getElementById('angle').value || 0;
+                area = (a * b * Math.sin(ang * Math.PI / 180)) / 2
+            }
+            else if (formulaSelect.value === 'circumradius') {
+                const a = +document.getElementById('sideA3').value || 0,
+                    b = +document.getElementById('sideB3').value || 0,
+                    c = +document.getElementById('sideC3').value || 0,
+                    R = +document.getElementById('circumradius').value || 0;
+                if (R > 0) area = (a * b * c) / (4 * R)
+            }
+            else if (formulaSelect.value === 'inradius') {
+                const a = +document.getElementById('sideA4').value || 0,
+                    b = +document.getElementById('sideB4').value || 0,
+                    c = +document.getElementById('sideC4').value || 0,
+                    r = +document.getElementById('inradius').value || 0;
+                area = ((a + b + c) / 2) * r
+            }
+            resultValue.textContent = area.toFixed(2)
+        }
+        formulaSelect.addEventListener('change', () => { showInputs(formulaSelect.value); calculate() });
+        document.querySelectorAll('input[type="number"]').forEach(i => i.addEventListener('input', calculate));
+        showInputs(formulaSelect.value);
+        calculate();
+    </script>
+</body>
+
+</html>

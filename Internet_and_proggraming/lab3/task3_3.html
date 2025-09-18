@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 3</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <h2><a href="./lab3.html">Назад до меню лаборатної роботи</a></h2>
+
+    <textarea id="output" placeholder="Тут набирається текст"></textarea>
+
+    <div class="keyboard">
+        <div class="row" id="digits"></div>
+        <div class="row" id="row1"></div>
+        <div class="row" id="row2"></div>
+        <div class="row" id="row3"></div>
+
+        <div class="controls">
+            <button id="switch-layout" class="key switch-layout">Alt+Shift</button>
+            <button id="clear" class="key clear">Очистити поле</button>
+            <span class="layout-indicator" id="layout-indicator">УКР</span>
+        </div>
+    </div>
+
+    <script>
+        // Масиви символів для різних розкладок
+        let digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+
+        let ukrainianLetters = [
+            'а', 'б', 'в', 'г', 'д', 'е', 'є', 'ж', 'з', 'и', 'і', 'ї', 'й', 'к', 'л', 'м',
+            'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ю', 'я'
+        ];
+
+        let englishLetters = [
+            'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h',
+            'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'
+        ];
+
+        // Поточний стан клавіатури
+        let isUkrainian = true;
+        let currentLetters = ukrainianLetters;
+
+        const out = document.getElementById('output');
+        const layoutIndicator = document.getElementById('layout-indicator');
+
+        function makeButton(ch) {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'key';
+            b.textContent = ch;
+            b.addEventListener('click', () => {
+                const start = out.selectionStart;
+                const end = out.selectionEnd;
+                const val = out.value;
+                out.value = val.slice(0, start) + ch + val.slice(end);
+                out.focus();
+                const pos = start + ch.length;
+                out.selectionStart = out.selectionEnd = pos;
+            });
+            return b;
+        }
+
+        function renderKeyboard() {
+            // Очищуємо всі ряди
+            document.getElementById('digits').innerHTML = '';
+            document.getElementById('row1').innerHTML = '';
+            document.getElementById('row2').innerHTML = '';
+            document.getElementById('row3').innerHTML = '';
+
+            // Додаємо цифри (вони однакові для всіх розкладок)
+            const digitsRow = document.getElementById('digits');
+            digits.forEach(d => digitsRow.appendChild(makeButton(d)));
+
+            // Розподіляємо літери по рядкам
+            const row1 = document.getElementById('row1');
+            const row2 = document.getElementById('row2');
+            const row3 = document.getElementById('row3');
+
+            let r1, r2, r3;
+
+            if (isUkrainian) {
+                // Українська розкладка: 11 + 11 + 10 літер
+                r1 = currentLetters.slice(0, 11);
+                r2 = currentLetters.slice(11, 22);
+                r3 = currentLetters.slice(22, 32);
+            } else {
+                // Англійська розкладка: 10 + 9 + 7 літер (як на QWERTY)
+                r1 = currentLetters.slice(0, 10);  // qwertyuiop
+                r2 = currentLetters.slice(10, 19); // asdfghjkl
+                r3 = currentLetters.slice(19, 26); // zxcvbnm
+            }
+
+            r1.forEach(l => row1.appendChild(makeButton(l)));
+            r2.forEach(l => row2.appendChild(makeButton(l)));
+            r3.forEach(l => row3.appendChild(makeButton(l)));
+
+            // Оновлюємо індикатор розкладки
+            layoutIndicator.textContent = isUkrainian ? 'УКР' : 'ENG';
+        }
+
+        function switchLayout() {
+            isUkrainian = !isUkrainian;
+            currentLetters = isUkrainian ? ukrainianLetters : englishLetters;
+            renderKeyboard();
+        }
+
+        // Початкове відображення клавіатури
+        renderKeyboard();
+
+        // Обробники подій
+        document.getElementById('switch-layout').addEventListener('click', switchLayout);
+
+        document.getElementById('clear').addEventListener('click', () => {
+            out.value = '';
+            out.focus();
+        });
+
+        // Додаємо підтримку реальної комбінації Alt+Shift
+        let altPressed = false;
+        let shiftPressed = false;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Alt') altPressed = true;
+            if (e.key === 'Shift') shiftPressed = true;
+
+            if (altPressed && shiftPressed) {
+                e.preventDefault();
+                switchLayout();
+            }
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'Alt') altPressed = false;
+            if (e.key === 'Shift') shiftPressed = false;
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 5</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <h2><a href="./lab3.html">Назад до меню лаборатної роботи</a></h2>
+
+    <div class="quiz">
+        <div id="score" class="score">Загальний рахунок 0% (0 правильних відповідей з 5)</div>
+
+        <div id="question" class="question">5 + 3 = </div>
+
+        <input type="number" id="answer" placeholder="Відповідь">
+
+        <div>
+            <button id="check">Перевірити</button>
+            <button id="next">Наступне завдання</button>
+        </div>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        let operations = ['+', '-', '*', '/'];
+        let currentQuestion = 0;
+        let correctAnswers = 0;
+        let totalQuestions = 5;
+        let currentCorrectAnswer = 0;
+
+        const scoreElement = document.getElementById('score');
+        const questionElement = document.getElementById('question');
+        const answerInput = document.getElementById('answer');
+        const checkButton = document.getElementById('check');
+        const nextButton = document.getElementById('next');
+        const resultElement = document.getElementById('result');
+
+        function getRandomNumber() {
+            return Math.floor(Math.random() * 10);
+        }
+
+        function getRandomOperation() {
+            return operations[Math.floor(Math.random() * operations.length)];
+        }
+
+        function calculateAnswer(num1, num2, operation) {
+            switch (operation) {
+                case '+': return num1 + num2;
+                case '-': return num1 - num2;
+                case '*': return num1 * num2;
+                case '/': return Math.round((num1 / num2) * 10) / 10;
+                default: return 0;
+            }
+        }
+
+        function generateQuestion() {
+            let num1 = getRandomNumber();
+            let num2 = getRandomNumber();
+            let operation = getRandomOperation();
+
+            if (operation === '/' && num2 === 0) {
+                num2 = 1;
+            }
+
+            currentCorrectAnswer = calculateAnswer(num1, num2, operation);
+            questionElement.textContent = `${num1} ${operation} ${num2} = `;
+            answerInput.value = '';
+            resultElement.textContent = '';
+        }
+
+        function updateScore() {
+            let percentage = Math.round((correctAnswers / totalQuestions) * 100);
+            scoreElement.textContent = `Загальний рахунок ${percentage}% (${correctAnswers} правильних відповідей з ${totalQuestions})`;
+        }
+
+        function checkAnswer() {
+            let userAnswer = parseFloat(answerInput.value);
+
+            if (Math.abs(userAnswer - currentCorrectAnswer) < 0.1) {
+                correctAnswers++;
+                resultElement.textContent = 'Правильно';
+            } else {
+                resultElement.textContent = `Помилка, правильна відповідь «${currentCorrectAnswer}»`;
+            }
+
+            updateScore();
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < totalQuestions) {
+                generateQuestion();
+            } else {
+                questionElement.textContent = 'Тест завершено!';
+                answerInput.style.display = 'none';
+                checkButton.style.display = 'none';
+                nextButton.style.display = 'none';
+            }
+        }
+
+        checkButton.addEventListener('click', checkAnswer);
+        nextButton.addEventListener('click', nextQuestion);
+
+        answerInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+
+        generateQuestion();
+        updateScore();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 2</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <h2><a href="./lab3.html">Назад до меню меню лаборатної роботи</a></h2>
+
+    <textarea id="output" placeholder="Тут набирається текст"></textarea>
+
+    <div class="keyboard">
+        <div class="row" id="digits"></div>
+        <div class="row" id="row1"></div>
+        <div class="row" id="row2"></div>
+        <div class="row" id="row3"></div>
+        <div style="margin-top:8px"><button id="clear" class="key clear">Очистити поле</button></div>
+    </div>
+
+
+    <script>
+        let digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+        let letters = ['а', 'б', 'в', 'г', 'д', 'е', 'є', 'ж', 'з', 'и', 'і', 'ї', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ю', 'я'];
+
+
+        const out = document.getElementById('output');
+
+
+        function makeButton(ch) {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'key';
+            b.textContent = ch;
+            b.addEventListener('click', () => {
+                const start = out.selectionStart;
+                const end = out.selectionEnd;
+                const val = out.value;
+                out.value = val.slice(0, start) + ch + val.slice(end);
+                out.focus();
+                const pos = start + ch.length;
+                out.selectionStart = out.selectionEnd = pos;
+            });
+            return b;
+        }
+
+        function renderKeyboard() {
+            document.getElementById('digits').innerHTML = '';
+            document.getElementById('row1').innerHTML = '';
+            document.getElementById('row2').innerHTML = '';
+            document.getElementById('row3').innerHTML = '';
+
+            const digitsRow = document.getElementById('digits');
+            digits.forEach(d => digitsRow.appendChild(makeButton(d)));
+
+            const row1 = document.getElementById('row1');
+            const row2 = document.getElementById('row2');
+            const row3 = document.getElementById('row3');
+
+            const r1 = currentLetters.slice(0, 11);
+            const r2 = currentLetters.slice(11, 22);
+            const r3 = currentLetters.slice(22, 33);
+
+            r1.forEach(l => row1.appendChild(makeButton(l)));
+            r2.forEach(l => row2.appendChild(makeButton(l)));
+            r3.forEach(l => row3.appendChild(makeButton(l)));
+        }
+
+        const digitsRow = document.getElementById('digits');
+        digits.forEach(d => digitsRow.appendChild(makeButton(d)));
+
+
+        const row1 = document.getElementById('row1');
+        const row2 = document.getElementById('row2');
+        const row3 = document.getElementById('row3');
+
+        const r1 = letters.slice(0, 11);
+        const r2 = letters.slice(11, 22);
+        const r3 = letters.slice(22, 33);
+
+
+        r1.forEach(l => row1.appendChild(makeButton(l)));
+        r2.forEach(l => row2.appendChild(makeButton(l)));
+        r3.forEach(l => row3.appendChild(makeButton(l)));
+
+
+        document.getElementById('clear').addEventListener('click', () => { out.value = ''; out.focus(); });
+    </script>
+</body>
+
+</html>

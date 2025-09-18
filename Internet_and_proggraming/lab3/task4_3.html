@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 4</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <h2><a href="./lab3.html">Назад до меню лаборатної роботи</a></h2>
+
+    <div class="viewer">
+        <h2>Переглядач зображень</h2>
+
+        <img id="image" src="" alt="Зображення">
+
+        <div class="controls">
+            <button id="prev">Назад</button>
+            <button id="next">Вперед</button>
+        </div>
+    </div>
+
+    <script>
+        let images = ['./images/photo1.jpg', './images/photo2.jpg', './images/photo3.gif', './images/photo4.jpg'];
+        let currentIndex = 0;
+
+        const imageElement = document.getElementById('image');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+
+        function showImage() {
+            imageElement.src = images[currentIndex];
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage();
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage();
+        }
+
+        nextButton.addEventListener('click', nextImage);
+        prevButton.addEventListener('click', prevImage);
+
+        showImage();
+    </script>
+</body>
+
+</html>
