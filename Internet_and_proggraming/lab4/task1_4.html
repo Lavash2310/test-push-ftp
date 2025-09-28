@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2><a href="./lab4.html">Назад до меню меню лаборатної роботи</a></h2>
+
+        <form name="testForm">
+            <div class="question">
+                <h3>1. Яка мова програмування використовується для розробки веб-сторінок?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="pol0" value="1" id="q1a">
+                        <label for="q1a">JavaScript</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="pol0" value="0" id="q1b">
+                        <label for="q1b">C++</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="pol0" value="0" id="q1c">
+                        <label for="q1c">Java</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="pol0" value="0" id="q1d">
+                        <label for="q1d">Python</label>
+                    </div>
+                </div>
+                <div class="result-item">Результат 1: <span id="rezultatRadio0"></span> бал(ів)</div>
+            </div>
+
+            <div class="question">
+                <h3>2. Що означає HTML?</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="pol1" value="0" id="q2a">
+                        <label for="q2a">Home Tool Markup Language</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="pol1" value="1" id="q2b">
+                        <label for="q2b">HyperText Markup Language</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="pol1" value="0" id="q2c">
+                        <label for="q2c">Hyperlinks and Text Markup Language</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="pol1" value="0" id="q2d">
+                        <label for="q2d">High Tech Modern Language</label>
+                    </div>
+                </div>
+                <div class="result-item">Результат 2: <span id="rezultatRadio1"></span> бал(ів)</div>
+            </div>
+
+            <div class="question">
+                <h3>3. Які з наступних є мовами програмування? (оберіть правильні)</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="checkbox" name="pol2" value="1" id="q3a">
+                        <label for="q3a">Python</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" name="pol2" value="1" id="q3b">
+                        <label for="q3b">Java</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" name="pol2" value="0" id="q3c">
+                        <label for="q3c">HTML</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" name="pol2" value="0" id="q3d">
+                        <label for="q3d">CSS</label>
+                    </div>
+                </div>
+                <div class="result-item">Результат 3: <span id="rezultatCheck2"></span> бал(ів)</div>
+            </div>
+
+            <div class="question">
+                <h3>4. Які з наступних є типами даних у програмуванні? (оберіть правильні)</h3>
+                <div class="options">
+                    <div class="option">
+                        <input type="checkbox" name="pol3" value="1" id="q4a">
+                        <label for="q4a">Integer</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" name="pol3" value="0" id="q4b">
+                        <label for="q4b">Color</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" name="pol3" value="1" id="q4c">
+                        <label for="q4c">String</label>
+                    </div>
+                    <div class="option">
+                        <input type="checkbox" name="pol3" value="0" id="q4d">
+                        <label for="q4d">Website</label>
+                    </div>
+                </div>
+                <div class="result-item">Результат 4: <span id="rezultatCheck3"></span> бал(ів)</div>
+            </div>
+
+            <div class="question">
+                <h3>5. Який символ використовується для коментарів у JavaScript?</h3>
+                <select name="pol4">
+                    <option value="0">Оберіть відповідь</option>
+                    <option value="0">#</option>
+                    <option value="1">//</option>
+                    <option value="0">/*</option>
+                    <option value="0">--</option>
+                </select>
+                <div class="result-item">Результат 5: <span id="rezultatSelect4"></span> бал(ів)</div>
+            </div>
+
+            <div class="question">
+                <h3>6. Які з наступних є веб-браузерами? (утримуйте Ctrl для множинного вибору)</h3>
+                <select name="pol5" multiple size="4">
+                    <option value="1">Chrome</option>
+                    <option value="0">Photoshop</option>
+                    <option value="1">Firefox</option>
+                    <option value="0">Excel</option>
+                </select>
+                <div class="result-item">Результат 6: <span id="rezultatMultiSelect5"></span> бал(ів)</div>
+            </div>
+
+            <div class="question">
+                <h3>7. Яка версія HTML є найновішою? (введіть цифру)</h3>
+                <input type="text" name="pol6" placeholder="Введіть відповідь">
+                <div class="result-item">Результат 7: <span id="rezultatText6"></span> бал(ів)</div>
+            </div>
+
+            <button type="button" class="submit-btn" onclick="Result(document.testForm)">Завершити тестування</button>
+        </form>
+
+        <div class="results" id="results">
+            <h2>Результати тестування</h2>
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Запитання</th>
+                        <th>Ваша відповідь</th>
+                        <th>Бали</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody">
+                </tbody>
+            </table>
+            <div class="total-score" id="totalScore"></div>
+        </div>
+    </div>
+
+    <script>
+        let rezultatRadio0 = 0;
+        let rezultatRadio1 = 0;
+        let rezultatCheck2 = 0;
+        let rezultatCheck3 = 0;
+        let rezultatSelect4 = 0;
+        let rezultatMultiSelect5 = 0;
+        let rezultatText6 = 0;
+
+        function Result(form) {
+            let bal = new Array(10);
+
+            bal[0] = document.getElementsByName('pol0');
+            rezultatRadio0 = 0;
+            for (let i = 0; i < bal[0].length; i++) {
+                if (form.pol0[i].type === 'radio' && form.pol0[i].checked) {
+                    rezultatRadio0 = parseFloat(form.pol0[i].value);
+                    break;
+                }
+            }
+            document.getElementById('rezultatRadio0').innerHTML = rezultatRadio0;
+
+            bal[1] = document.getElementsByName('pol1');
+            rezultatRadio1 = 0;
+            for (let i = 0; i < bal[1].length; i++) {
+                if (form.pol1[i].type === 'radio' && form.pol1[i].checked) {
+                    rezultatRadio1 = parseFloat(form.pol1[i].value);
+                    break;
+                }
+            }
+            document.getElementById('rezultatRadio1').innerHTML = rezultatRadio1;
+
+            bal[2] = document.getElementsByName('pol2');
+            rezultatCheck2 = 0;
+            let selectedCount2 = 0;
+            let correctCount2 = 0;
+            for (let i = 0; i < bal[2].length; i++) {
+                if (form.pol2[i].type === 'checkbox' && form.pol2[i].checked) {
+                    selectedCount2++;
+                    if (parseFloat(form.pol2[i].value) === 1) {
+                        correctCount2++;
+                    }
+                }
+            }
+            if (selectedCount2 >= 3) {
+                rezultatCheck2 = 0;
+            } else if (selectedCount2 === 2 && correctCount2 === 2) {
+                rezultatCheck2 = 2;
+            } else if (selectedCount2 === 2 && correctCount2 === 1) {
+                rezultatCheck2 = 1;
+            } else if (selectedCount2 === 1 && correctCount2 === 1) {
+                rezultatCheck2 = 1;
+            }
+            document.getElementById('rezultatCheck2').innerHTML = rezultatCheck2;
+
+            bal[3] = document.getElementsByName('pol3');
+            rezultatCheck3 = 0;
+            let selectedCount3 = 0;
+            let correctCount3 = 0;
+            for (let i = 0; i < bal[3].length; i++) {
+                if (form.pol3[i].type === 'checkbox' && form.pol3[i].checked) {
+                    selectedCount3++;
+                    if (parseFloat(form.pol3[i].value) === 1) {
+                        correctCount3++;
+                    }
+                }
+            }
+            if (selectedCount3 >= 3) {
+                rezultatCheck3 = 0;
+            } else if (selectedCount3 === 2 && correctCount3 === 2) {
+                rezultatCheck3 = 2;
+            } else if (selectedCount3 === 2 && correctCount3 === 1) {
+                rezultatCheck3 = 1;
+            } else if (selectedCount3 === 1 && correctCount3 === 1) {
+                rezultatCheck3 = 1;
+            }
+            document.getElementById('rezultatCheck3').innerHTML = rezultatCheck3;
+
+            rezultatSelect4 = 0;
+            if (form.pol4.value) {
+                rezultatSelect4 = parseFloat(form.pol4.value);
+            }
+            document.getElementById('rezultatSelect4').innerHTML = rezultatSelect4;
+
+            rezultatMultiSelect5 = 0;
+            let selectedCount5 = 0;
+            let correctCount5 = 0;
+            for (let i = 0; i < form.pol5.options.length; i++) {
+                if (form.pol5.options[i].selected) {
+                    selectedCount5++;
+                    if (parseFloat(form.pol5.options[i].value) === 1) {
+                        correctCount5++;
+                    }
+                }
+            }
+            if (selectedCount5 >= 3) {
+                rezultatMultiSelect5 = 0;
+            } else if (selectedCount5 === 2 && correctCount5 === 2) {
+                rezultatMultiSelect5 = 2;
+            } else if (selectedCount5 === 2 && correctCount5 === 1) {
+                rezultatMultiSelect5 = 1;
+            } else if (selectedCount5 === 1 && correctCount5 === 1) {
+                rezultatMultiSelect5 = 1;
+            }
+            document.getElementById('rezultatMultiSelect5').innerHTML = rezultatMultiSelect5;
+
+            rezultatText6 = 0;
+            if (form.pol6.value.trim() === "5") {
+                rezultatText6 = 1;
+            }
+            document.getElementById('rezultatText6').innerHTML = rezultatText6;
+
+            showResultsTable();
+        }
+
+        function showResultsTable() {
+            const questions = [
+                "Яка мова програмування використовується для розробки веб-сторінок?",
+                "Що означає HTML?",
+                "Які з наступних є мовами програмування?",
+                "Які з наступних є типами даних у програмуванні?",
+                "Який символ використовується для коментарів у JavaScript?",
+                "Які з наступних є веб-браузерами?",
+                "Яка версія HTML є найновішою?"
+            ];
+
+            const answers = [
+                getSelectedRadioAnswer('pol0'),
+                getSelectedRadioAnswer('pol1'),
+                getSelectedCheckboxAnswers('pol2'),
+                getSelectedCheckboxAnswers('pol3'),
+                getSelectedSelectAnswer('pol4'),
+                getSelectedMultiSelectAnswers('pol5'),
+                document.testForm.pol6.value || "Не введено"
+            ];
+
+            const scores = [
+                rezultatRadio0,
+                rezultatRadio1,
+                rezultatCheck2,
+                rezultatCheck3,
+                rezultatSelect4,
+                rezultatMultiSelect5,
+                rezultatText6
+            ];
+
+            const resultsBody = document.getElementById('resultsBody');
+            resultsBody.innerHTML = '';
+
+            let totalScore = 0;
+            for (let i = 0; i < questions.length; i++) {
+                const row = resultsBody.insertRow();
+                row.insertCell(0).textContent = i + 1;
+                row.insertCell(1).textContent = questions[i];
+                row.insertCell(2).textContent = answers[i];
+                row.insertCell(3).textContent = scores[i];
+                totalScore += scores[i];
+            }
+
+            document.getElementById('totalScore').textContent = `Загальний бал: ${totalScore} з 10 можливих`;
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function getSelectedRadioAnswer(name) {
+            const radios = document.getElementsByName(name);
+            for (let i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    return radios[i].nextElementSibling.textContent;
+                }
+            }
+            return "Не обрано";
+        }
+
+        function getSelectedCheckboxAnswers(name) {
+            const checkboxes = document.getElementsByName(name);
+            const selected = [];
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    selected.push(checkboxes[i].nextElementSibling.textContent);
+                }
+            }
+            return selected.length > 0 ? selected.join(", ") : "Не обрано";
+        }
+
+        function getSelectedSelectAnswer(name) {
+            const select = document.getElementsByName(name)[0];
+            return select.value ? select.options[select.selectedIndex].text : "Не обрано";
+        }
+
+        function getSelectedMultiSelectAnswers(name) {
+            const select = document.getElementsByName(name)[0];
+            const selected = [];
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].selected) {
+                    selected.push(select.options[i].text);
+                }
+            }
+            return selected.length > 0 ? selected.join(", ") : "Не обрано";
+        }
+    </script>
+</body>
+
+</html>
