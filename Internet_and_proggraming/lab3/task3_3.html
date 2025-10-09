@@ -27,7 +27,6 @@
     </div>
 
     <script>
-        // Масиви символів для різних розкладок
         let digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
         let ukrainianLetters = [
@@ -40,7 +39,6 @@
             'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'
         ];
 
-        // Поточний стан клавіатури
         let isUkrainian = true;
         let currentLetters = ukrainianLetters;
 
@@ -65,17 +63,14 @@
         }
 
         function renderKeyboard() {
-            // Очищуємо всі ряди
             document.getElementById('digits').innerHTML = '';
             document.getElementById('row1').innerHTML = '';
             document.getElementById('row2').innerHTML = '';
             document.getElementById('row3').innerHTML = '';
 
-            // Додаємо цифри (вони однакові для всіх розкладок)
             const digitsRow = document.getElementById('digits');
             digits.forEach(d => digitsRow.appendChild(makeButton(d)));
 
-            // Розподіляємо літери по рядкам
             const row1 = document.getElementById('row1');
             const row2 = document.getElementById('row2');
             const row3 = document.getElementById('row3');
@@ -83,22 +78,19 @@
             let r1, r2, r3;
 
             if (isUkrainian) {
-                // Українська розкладка: 11 + 11 + 10 літер
                 r1 = currentLetters.slice(0, 11);
                 r2 = currentLetters.slice(11, 22);
                 r3 = currentLetters.slice(22, 32);
             } else {
-                // Англійська розкладка: 10 + 9 + 7 літер (як на QWERTY)
-                r1 = currentLetters.slice(0, 10);  // qwertyuiop
-                r2 = currentLetters.slice(10, 19); // asdfghjkl
-                r3 = currentLetters.slice(19, 26); // zxcvbnm
+                r1 = currentLetters.slice(0, 10);
+                r2 = currentLetters.slice(10, 19);
+                r3 = currentLetters.slice(19, 26);
             }
 
             r1.forEach(l => row1.appendChild(makeButton(l)));
             r2.forEach(l => row2.appendChild(makeButton(l)));
             r3.forEach(l => row3.appendChild(makeButton(l)));
 
-            // Оновлюємо індикатор розкладки
             layoutIndicator.textContent = isUkrainian ? 'УКР' : 'ENG';
         }
 
@@ -108,10 +100,8 @@
             renderKeyboard();
         }
 
-        // Початкове відображення клавіатури
         renderKeyboard();
 
-        // Обробники подій
         document.getElementById('switch-layout').addEventListener('click', switchLayout);
 
         document.getElementById('clear').addEventListener('click', () => {
@@ -119,7 +109,6 @@
             out.focus();
         });
 
-        // Додаємо підтримку реальної комбінації Alt+Shift
         let altPressed = false;
         let shiftPressed = false;
 
