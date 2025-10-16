@@ -123,6 +123,28 @@
             const total = quantities[currentIndex] * costs[currentIndex];
             document.form1.total.value = "Загальна сума: " + total;
         }
+
+        function buy() {
+            if (currentIndex < 0) {
+                alert("Оберіть товар зі списку!");
+                return;
+            }
+
+            let quantity = parseInt(document.form1.quantities.value);
+
+            if (isNaN(quantity) || quantity <= 0) {
+                alert("Введіть правильну кількість!");
+                return;
+            }
+
+            if (quantity > quantities[currentIndex]) {
+                alert("На складі тільки " + quantities[currentIndex] + " шт.");
+                return;
+            }
+
+            let total = (costs[currentIndex] * quantity).toFixed(2);
+            alert("Ви купили " + quantity + " шт. товару '" + products[currentIndex] + "' на суму " + total);
+        }
     </script>
 
     <form name="form1">
@@ -143,6 +165,9 @@
         <input type="button" value="Загальна сума" onclick="fun2()">
         <br><br>
         <input type="text" name="total" readonly>
+        <br><br>
+        <input type="text" name="quantities" placeholder="Введіть кількість">
+        <input type="button" value="Купити" onclick="buy()">
     </form>
 </body>
 
