@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 6</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2><a href="./lab6.html">Назад до меню меню лаборатної роботи</a></h2>
+    <div class="container">
+        <h1>Форма реєстрації</h1>
+
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="email">Електронна пошта:</label>
+                <div class="input-wrapper">
+                    <input type="text" id="email" placeholder="example@pnu.edu.ua">
+                    <span class="status-icon" id="emailIcon"></span>
+                </div>
+                <div class="error-message" id="emailError"></div>
+                <div class="hint">Має містити @ і закінчуватися на pnu.edu.ua</div>
+            </div>
+
+            <div class="form-group">
+                <label for="fullname">Ім'я та прізвище:</label>
+                <div class="input-wrapper">
+                    <input type="text" id="fullname" placeholder="Іван ПЕТРЕНКО">
+                    <span class="status-icon" id="fullnameIcon"></span>
+                </div>
+                <div class="error-message" id="fullnameError"></div>
+                <div class="hint">Ім'я з великої літери, прізвище всі великі</div>
+            </div>
+
+            <div class="form-group">
+                <label for="login">Логін:</label>
+                <div class="input-wrapper">
+                    <input type="text" id="login" placeholder="username123">
+                    <span class="status-icon" id="loginIcon"></span>
+                </div>
+                <div class="error-message" id="loginError"></div>
+                <div class="hint">Тільки латинські літери та цифри</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль:</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" placeholder="••••••••">
+                    <span class="status-icon" id="passwordIcon"></span>
+                </div>
+                <div class="error-message" id="passwordError"></div>
+                <div class="hint">Мінімум 8 символів, буква + цифра + спецсимвол (_-!@#$%^&*)</div>
+            </div>
+
+            <div class="form-group">
+                <label for="zipcode">Поштовий індекс:</label>
+                <div class="input-wrapper">
+                    <input type="text" id="zipcode" placeholder="12345">
+                    <span class="status-icon" id="zipcodeIcon"></span>
+                </div>
+                <div class="error-message" id="zipcodeError"></div>
+                <div class="hint">Рівно 5 цифр</div>
+            </div>
+
+            <button type="button" onclick="validateForm()">Перевірити</button>
+
+            <div class="success-message" id="successMessage">
+                ✅ Всі поля заповнені правильно!
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const patterns = {
+            email: /@pnu\.edu\.ua$/,
+            fullname: /^[A-ZА-ЯІЇЄҐ][a-zа-яіїєґ']+ [A-ZА-ЯІЇЄҐ]+$/,
+            login: /^[a-zA-Z0-9]+$/,
+            password: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[_\-!@#$%^&*]).{8,}$/,
+            zipcode: /^\d{5}$/
+        };
+
+        // Повідомлення про помилки
+        const errorMessages = {
+            email: 'Email повинен містити @ і закінчуватися на pnu.edu.ua',
+            fullname: "Формат: Ім'я з великої (решта маленькі), прізвище ВСІ ВЕЛИКІ",
+            login: 'Логін може містити тільки латинські літери та цифри',
+            password: 'Пароль має бути мінімум 8 символів і містити букву, цифру та спецсимвол',
+            zipcode: 'Поштовий індекс повинен містити рівно 5 цифр'
+        };
+
+        function validateField(fieldId, pattern, errorMessage) {
+            const input = document.getElementById(fieldId);
+            const icon = document.getElementById(fieldId + 'Icon');
+            const error = document.getElementById(fieldId + 'Error');
+            const value = input.value.trim();
+
+            if (value === '') {
+                input.className = 'invalid';
+                icon.className = 'status-icon show';
+                icon.textContent = '❌';
+                error.className = 'error-message show';
+                error.textContent = "Це поле обов'язкове";
+                return false;
+            }
+
+            if (pattern.test(value)) {
+                input.className = 'valid';
+                icon.className = 'status-icon show';
+                icon.textContent = '✅';
+                error.className = 'error-message';
+                return true;
+            } else {
+                input.className = 'invalid';
+                icon.className = 'status-icon show';
+                icon.textContent = '❌';
+                error.className = 'error-message show';
+                error.textContent = errorMessage;
+                return false;
+            }
+        }
+
+        function validateForm() {
+            document.getElementById('successMessage').className = 'success-message';
+
+            const isEmailValid = validateField('email', patterns.email, errorMessages.email);
+            const isFullnameValid = validateField('fullname', patterns.fullname, errorMessages.fullname);
+            const isLoginValid = validateField('login', patterns.login, errorMessages.login);
+            const isPasswordValid = validateField('password', patterns.password, errorMessages.password);
+            const isZipcodeValid = validateField('zipcode', patterns.zipcode, errorMessages.zipcode);
+
+            if (isEmailValid && isFullnameValid && isLoginValid && isPasswordValid && isZipcodeValid) {
+                document.getElementById('successMessage').className = 'success-message show';
+            }
+        }
+    </script>
+</body>
+
+</html>
