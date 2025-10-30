@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лаборатрорна робота 7</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2><a href="./lab7.html">Назад до меню меню лаборатної роботи</a></h2>
+    <div class="task">
+        <h3>Завдання 1: Довжина рядка</h3>
+        <label>Введіть рядок:</label>
+        <input type="text" id="input1" placeholder="Введіть текст...">
+        <button onclick="task1()">Визначити довжину</button>
+        <div class="result" id="result1"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 2: Зміна регістру</h3>
+        <label>Введіть рядок:</label>
+        <input type="text" id="input2" placeholder="Введіть текст...">
+        <button onclick="task2()">Змінити регістр</button>
+        <div class="result" id="result2"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 3: Пошук символу</h3>
+        <label>Введіть рядок:</label>
+        <input type="text" id="input3" placeholder="Введіть текст...">
+        <label>Введіть символ для пошуку:</label>
+        <input type="text" id="char3" maxlength="1" placeholder="Один символ">
+        <button onclick="task3()">Знайти індекс</button>
+        <div class="result" id="result3"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 4: Кількість входжень символу</h3>
+        <label>Введіть рядок:</label>
+        <input type="text" id="input4" placeholder="Наприклад: hello world">
+        <label>Введіть символ для підрахунку:</label>
+        <input type="text" id="char4" maxlength="1" placeholder="Один символ">
+        <button onclick="task4()">Підрахувати</button>
+        <div class="result" id="result4"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 5: Обмін сусідніх символів</h3>
+        <label>Введіть рядок:</label>
+        <input type="text" id="input5" placeholder="Наприклад: abcdef">
+        <button onclick="task5()">Обміняти символи</button>
+        <div class="result" id="result5"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 6: Перевірка на спам</h3>
+        <label>Введіть текст для перевірки:</label>
+        <input type="text" id="input6" placeholder="Введіть текст...">
+        <button onclick="task6()">Перевірити на спам</button>
+        <div class="result" id="result6"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 7: Скорочення рядка</h3>
+        <label>Введіть рядок:</label>
+        <input type="text" id="input7" placeholder="Наприклад: Hello, world!">
+        <label>Максимальна довжина:</label>
+        <input type="number" id="maxLen7" min="3" placeholder="Наприклад: 8">
+        <button onclick="task7()">Скоротити</button>
+        <div class="result" id="result7"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 8: Сортування слів за довжиною</h3>
+        <label>Введіть рядок зі словами:</label>
+        <input type="text" id="input8" placeholder="Наприклад: apple banana cherry date">
+        <button onclick="task8()">Відсортувати</button>
+        <div class="result" id="result8"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 9: Найчастіше повторювана буква</h3>
+        <label>Введіть рядок:</label>
+        <input type="text" id="input9" placeholder="Наприклад: apple pay">
+        <button onclick="task9()">Знайти букву</button>
+        <div class="result" id="result9"></div>
+    </div>
+
+    <div class="task">
+        <h3>Завдання 10: Найбільший спільний префікс</h3>
+        <label>Введіть слова через кому:</label>
+        <input type="text" id="input10" placeholder="Наприклад: flower, flow, flight">
+        <button onclick="task10()">Знайти префікс</button>
+        <div class="result" id="result10"></div>
+    </div>
+
+    <script>
+        function getStringLength(str) {
+            return str.length;
+        }
+
+        function task1() {
+            const input = document.getElementById('input1').value;
+            const length = getStringLength(input);
+            const resultDiv = document.getElementById('result1');
+            resultDiv.textContent = `Довжина рядка: ${length}`;
+            resultDiv.style.display = 'block';
+        }
+
+        function changeCase(str) {
+            return {
+                upper: str.toUpperCase(),
+                lower: str.toLowerCase()
+            };
+        }
+
+        function task2() {
+            const input = document.getElementById('input2').value;
+            const result = changeCase(input);
+            const resultDiv = document.getElementById('result2');
+            resultDiv.innerHTML = `Верхній регістр: ${result.upper}<br>Нижній регістр: ${result.lower}`;
+            resultDiv.style.display = 'block';
+        }
+
+        function findCharIndex(str, char) {
+            return str.indexOf(char);
+        }
+
+        function task3() {
+            const input = document.getElementById('input3').value;
+            const char = document.getElementById('char3').value;
+
+            if (char.length !== 1) {
+                alert('Будь ласка, введіть рівно один символ!');
+                return;
+            }
+
+            const index = findCharIndex(input, char);
+            const resultDiv = document.getElementById('result3');
+            resultDiv.textContent = `Індекс символу "${char}": ${index}`;
+            resultDiv.style.display = 'block';
+        }
+
+        function countCharOccurrences(str, char) {
+            let count = 0;
+            for (let i = 0; i < str.length; i++) {
+                if (str[i] === char) {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        function task4() {
+            const input = document.getElementById('input4').value;
+            const char = document.getElementById('char4').value;
+
+            if (char.length !== 1) {
+                alert('Будь ласка, введіть рівно один символ!');
+                return;
+            }
+
+            const count = countCharOccurrences(input, char);
+            const resultDiv = document.getElementById('result4');
+            resultDiv.textContent = `Символ "${char}" зустрічається ${count} раз(и)`;
+            resultDiv.style.display = 'block';
+        }
+
+        function swapAdjacentChars(str) {
+            let result = '';
+            for (let i = 0; i < str.length; i += 2) {
+                if (i + 1 < str.length) {
+                    result += str[i + 1] + str[i];
+                } else {
+                    result += str[i];
+                }
+            }
+            return result;
+        }
+
+        function task5() {
+            const input = document.getElementById('input5').value;
+            const result = swapAdjacentChars(input);
+            const resultDiv = document.getElementById('result5');
+            resultDiv.innerHTML = `Оригінал: ${input}<br>Результат: ${result}`;
+            resultDiv.style.display = 'block';
+        }
+
+        function checkSpam(str) {
+            const spamWords = ['100% безкоштовно', 'збільшення продажів', 'тільки сьогодні', 'не видаляйте'];
+            const lowerStr = str.toLowerCase();
+
+            for (let word of spamWords) {
+                if (lowerStr.includes(word.toLowerCase())) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function task6() {
+            const input = document.getElementById('input6').value;
+            const isSpam = checkSpam(input);
+            const resultDiv = document.getElementById('result6');
+            resultDiv.textContent = isSpam ? 'Це СПАМ!' : 'Спаму не виявлено';
+            resultDiv.style.display = 'block';
+        }
+
+        function truncate(str, maxLength) {
+            if (str.length <= maxLength) {
+                return str;
+            }
+            return str.slice(0, maxLength - 3) + '...';
+        }
+
+        function task7() {
+            const input = document.getElementById('input7').value;
+            const maxLen = parseInt(document.getElementById('maxLen7').value);
+
+            if (isNaN(maxLen) || maxLen < 3) {
+                alert('Будь ласка, введіть коректну максимальну довжину (мінімум 3)!');
+                return;
+            }
+
+            const result = truncate(input, maxLen);
+            const resultDiv = document.getElementById('result7');
+            resultDiv.innerHTML = `Оригінал: ${input}<br>Скорочено: ${result}`;
+            resultDiv.style.display = 'block';
+        }
+
+        function sortWordsByLength(str) {
+            const words = str.trim().split(/\s+/);
+            words.sort((a, b) => {
+                if (a.length !== b.length) {
+                    return a.length - b.length;
+                }
+                return a.localeCompare(b);
+            });
+            return words.join(' ');
+        }
+
+        function task8() {
+            const input = document.getElementById('input8').value;
+            const result = sortWordsByLength(input);
+            const resultDiv = document.getElementById('result8');
+            resultDiv.innerHTML = `Оригінал: ${input}<br>Відсортовано: ${result}`;
+            resultDiv.style.display = 'block';
+        }
+
+        // Завдання 9: Найчастіше повторювана буква
+        function findMostFrequentLetter(str) {
+            const letterCount = {};
+            let maxCount = 0;
+            let mostFrequent = '';
+
+            for (let char of str) {
+                if (/[a-zA-Zа-яА-ЯіІїЇєЄ]/.test(char)) {
+                    const lowerChar = char.toLowerCase();
+                    letterCount[lowerChar] = (letterCount[lowerChar] || 0) + 1;
+
+                    if (letterCount[lowerChar] > maxCount) {
+                        maxCount = letterCount[lowerChar];
+                        mostFrequent = lowerChar;
+                    }
+                }
+            }
+
+            return mostFrequent;
+        }
+
+        function task9() {
+            const input = document.getElementById('input9').value;
+            const result = findMostFrequentLetter(input);
+            const resultDiv = document.getElementById('result9');
+            resultDiv.innerHTML = `Рядок: ${input}<br>Найчастіше повторювана буква: "${result}"`;
+            resultDiv.style.display = 'block';
+        }
+
+        // Завдання 10: Найбільший спільний префікс
+        function findCommonPrefix(words) {
+            if (words.length === 0) return '';
+            if (words.length === 1) return words[0];
+
+            words.sort();
+
+            const first = words[0];
+            const last = words[words.length - 1];
+            let prefix = '';
+
+            for (let i = 0; i < first.length; i++) {
+                if (first[i] === last[i]) {
+                    prefix += first[i];
+                } else {
+                    break;
+                }
+            }
+
+            return prefix;
+        }
+
+        function task10() {
+            const input = document.getElementById('input10').value;
+            const words = input.split(',').map(word => word.trim()).filter(word => word.length > 0);
+
+            if (words.length === 0) {
+                alert('Будь ласка, введіть хоча б одне слово!');
+                return;
+            }
+
+            const result = findCommonPrefix(words);
+            const resultDiv = document.getElementById('result10');
+            resultDiv.innerHTML = `Слова: [${words.join(', ')}]<br>Спільний префікс: "${result}"${result === '' ? ' (немає спільного префіксу)' : ''}`;
+            resultDiv.style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
