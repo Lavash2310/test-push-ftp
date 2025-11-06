@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 8</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2><a href="./lab8.html">Назад до меню меню лаборатної роботи</a></h2>
+
+    <div class="task">
+        <h2>Завдання 6: Клас Book та Ebook (Варіант 1)</h2>
+
+        <div class="input-group">
+            <label>Назва книги:</label>
+            <input type="text" id="bookTitle" placeholder="Наприклад: Кобзар">
+        </div>
+        <div class="input-group">
+            <label>Автор:</label>
+            <input type="text" id="bookAuthor" placeholder="Наприклад: Тарас Шевченко">
+        </div>
+        <div class="input-group">
+            <label>Рік видання:</label>
+            <input type="number" id="bookYear" placeholder="Наприклад: 1840">
+        </div>
+        <div class="input-group">
+            <label>Розмір файлу (MB):</label>
+            <input type="number" id="fileSize" placeholder="Наприклад: 5.2">
+        </div>
+
+        <button onclick="task6_show()">Показати інформацію</button>
+        <button class="clear-btn" onclick="task6_clear()">Очистити поля</button>
+        <div id="result6" class="result"></div>
+    </div>
+    <script>
+        class Book {
+            constructor(title, author, year) {
+                this.title = title;
+                this.author = author;
+                this.year = year;
+            }
+
+            getInfo() {
+                return `Книга: "${this.title}" автор ${this.author}, ${this.year} рік`;
+            }
+        }
+
+        class Ebook extends Book {
+            constructor(title, author, year, fileSize) {
+                super(title, author, year);
+                this.fileSize = fileSize;
+            }
+
+            download() {
+                return `Завантаження "${this.title}"... Розмір файлу: ${this.fileSize} MB`;
+            }
+
+            static getTotalBooks() {
+                return "Статичний метод: загальна кількість книг в системі";
+            }
+        }
+
+        function task6_show() {
+            const title = document.getElementById('bookTitle').value;
+            const author = document.getElementById('bookAuthor').value;
+            const year = document.getElementById('bookYear').value;
+            const fileSize = document.getElementById('fileSize').value;
+
+            if (!title || !author || !year || !fileSize) {
+                document.getElementById('result6').innerHTML =
+                    '<strong style="color: red;">Будь ласка, заповніть всі поля!</strong>';
+                return;
+            }
+
+            const ebook = new Ebook(title, author, parseInt(year), parseFloat(fileSize));
+
+            document.getElementById('result6').innerHTML =
+                `<strong>${ebook.getInfo()}</strong><br>` +
+                `<strong>${ebook.download()}</strong><br>` +
+                `<strong>${Ebook.getTotalBooks()}</strong>`;
+        }
+
+        function task6_clear() {
+            document.getElementById('bookTitle').value = '';
+            document.getElementById('bookAuthor').value = '';
+            document.getElementById('bookYear').value = '';
+            document.getElementById('fileSize').value = '';
+            document.getElementById('result6').innerHTML = '';
+        }
+    </script>
+</body>
+
+</html>

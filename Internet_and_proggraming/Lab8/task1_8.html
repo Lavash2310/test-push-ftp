@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 8</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2><a href="./lab8.html">Назад до меню меню лаборатної роботи</a></h2>
+    <div class="task">
+        <h3>1.1. Поточний час</h3>
+        <button onclick="task1_showTime()">Показати поточний час</button>
+        <div id="result1_1" class="result"></div>
+
+        <h3>1.2. Зміна часу</h3>
+        <div class="input-group">
+            <label>Години:</label>
+            <input type="number" id="hours" value="20" min="0" max="23">
+        </div>
+        <div class="input-group">
+            <label>Хвилини:</label>
+            <input type="number" id="minutes" value="30" min="0" max="59">
+        </div>
+        <div class="input-group">
+            <label>Секунди:</label>
+            <input type="number" id="seconds" value="45" min="0" max="59">
+        </div>
+        <div class="input-group">
+            <label>Додати секунд:</label>
+            <input type="number" id="addSeconds" value="30">
+        </div>
+        <button onclick="task1_changeTime()">Змінити час</button>
+        <div id="result1_2" class="result"></div>
+    </div>
+    <script>
+        // Завдання 1
+        const timeObject = {
+            hours: 0,
+            minutes: 0,
+            seconds: 0
+        };
+
+        function task1_showTime() {
+            const now = new Date();
+            timeObject.hours = now.getHours();
+            timeObject.minutes = now.getMinutes();
+            timeObject.seconds = now.getSeconds();
+
+            document.getElementById('result1_1').innerHTML =
+                `<strong>Поточний час:</strong> ${formatTime(timeObject.hours)}:${formatTime(timeObject.minutes)}:${formatTime(timeObject.seconds)}`;
+        }
+
+        function task1_changeTime() {
+            timeObject.hours = parseInt(document.getElementById('hours').value) || 0;
+            timeObject.minutes = parseInt(document.getElementById('minutes').value) || 0;
+            timeObject.seconds = parseInt(document.getElementById('seconds').value) || 0;
+            const addSec = parseInt(document.getElementById('addSeconds').value) || 0;
+
+            const oldTime = `${formatTime(timeObject.hours)}:${formatTime(timeObject.minutes)}:${formatTime(timeObject.seconds)}`;
+
+            let totalSeconds = timeObject.hours * 3600 + timeObject.minutes * 60 + timeObject.seconds;
+            totalSeconds += addSec;
+
+            totalSeconds = totalSeconds % 86400;
+            if (totalSeconds < 0) totalSeconds += 86400;
+
+            timeObject.hours = Math.floor(totalSeconds / 3600);
+            timeObject.minutes = Math.floor((totalSeconds % 3600) / 60);
+            timeObject.seconds = totalSeconds % 60;
+
+            const newTime = `${formatTime(timeObject.hours)}:${formatTime(timeObject.minutes)}:${formatTime(timeObject.seconds)}`;
+
+            document.getElementById('result1_2').innerHTML =
+                `<strong>Початковий час:</strong> ${oldTime}<br>` +
+                `<strong>Додано секунд:</strong> ${addSec}<br>` +
+                `<strong>Новий час:</strong> ${newTime}`;
+        }
+
+        function formatTime(value) {
+            return value.toString().padStart(2, '0');
+        }
+    </script>
+</body>
+
+</html>

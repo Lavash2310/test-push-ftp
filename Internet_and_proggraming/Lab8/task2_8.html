@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 8</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2><a href="./lab8.html">Назад до меню меню лаборатної роботи</a></h2>
+    <div class="task">
+        <h3>2.1. Виведення поточної дати, дня тижня і часу</h3>
+        <button onclick="task2_1()">Виконати</button>
+        <div id="result2_1" class="result"></div>
+
+        <h3>2.2. Останній день місяця</h3>
+        <div class="input-group">
+            <label>Рік:</label>
+            <input type="number" id="year" value="2025">
+        </div>
+        <div class="input-group">
+            <label>Номер місяця (1-12):</label>
+            <input type="number" id="month" value="2" min="1" max="12">
+        </div>
+        <button onclick="task2_2()">Визначити останній день</button>
+        <div id="result2_2" class="result"></div>
+
+        <h3>2.3. Секунди від початку та до кінця дня</h3>
+        <button onclick="task2_3()">Обчислити</button>
+        <div id="result2_3" class="result"></div>
+    </div>
+
+    <script>
+        function task2_1() {
+            const now = new Date();
+            const months = ['січня', 'лютого', 'березня', 'квітня', 'травня', 'червня',
+                'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня'];
+            const days = ['неділя', 'понеділок', 'вівторок', 'середа', 'четвер', 'п\'ятниця', 'субота'];
+
+            const result = `<strong>Дата:</strong> ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()} року<br>` +
+                `<strong>День тижня:</strong> ${days[now.getDay()]}<br>` +
+                `<strong>Час:</strong> ${formatTime(now.getHours())}:${formatTime(now.getMinutes())}`;
+
+            document.getElementById('result2_1').innerHTML = result;
+        }
+
+        function task2_2() {
+            const year = parseInt(document.getElementById('year').value);
+            const month = parseInt(document.getElementById('month').value);
+
+            // Отримуємо останній день місяця
+            const lastDay = new Date(year, month, 0).getDate();
+
+            const months = ['січень', 'лютий', 'березень', 'квітень', 'травень', 'червень',
+                'липень', 'серпень', 'вересень', 'жовтень', 'листопад', 'грудень'];
+
+            document.getElementById('result2_2').innerHTML =
+                `<strong>Останній день ${months[month - 1]} ${year} року:</strong> ${lastDay}`;
+        }
+
+        function task2_3() {
+            const now = new Date();
+            const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+            const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+
+            const secondsFromStart = Math.floor((now - startOfDay) / 1000);
+            const secondsToEnd = Math.floor((endOfDay - now) / 1000) + 1;
+
+            document.getElementById('result2_3').innerHTML =
+                `<strong>Секунд від початку дня:</strong> ${secondsFromStart}<br>` +
+                `<strong>Секунд до початку наступного дня:</strong> ${secondsToEnd}`;
+        }
+
+        function formatTime(value) {
+            return value.toString().padStart(2, '0');
+        }
+    </script>
+</body>
+
+</html>

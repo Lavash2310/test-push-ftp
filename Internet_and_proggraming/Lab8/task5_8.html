@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 8</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2><a href="./lab8.html">Назад до меню меню лаборатної роботи</a></h2>
+    <div class="task">
+        <h2>Завдання 5: Статичний метод</h2>
+        <button onclick="task5()">Показати інформацію</button>
+        <div id="result5" class="result"></div>
+    </div>
+    <script>
+        class MathHelper {
+            static add(a, b) {
+                return a + b;
+            }
+        }
+
+        function task5() {
+            const result = MathHelper.add(5, 7);
+            document.getElementById('result5').innerHTML =
+                `<strong>MathHelper.add(5, 7) = ${result}</strong>`;
+        }
+    </script>
+</body>
+
+</html>

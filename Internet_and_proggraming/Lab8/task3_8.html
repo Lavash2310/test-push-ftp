@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 8</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2><a href="./lab8.html">Назад до меню меню лаборатної роботи</a></h2>
+    <div class="task">
+        <h2>Завдання 3: Клас Car</h2>
+        <button onclick="task3()">Показати інформацію</button>
+        <div id="result3" class="result"></div>
+    </div>
+    <script>
+        class Car {
+            constructor(brand, model, year) {
+                this.brand = brand;
+                this.model = model;
+                this.year = year;
+            }
+
+            info() {
+                return `Авто: ${this.brand} ${this.model}, ${this.year} року.`;
+            }
+        }
+
+        function task3() {
+            const car1 = new Car("Toyota", "Camry", 2020);
+            document.getElementById('result3').innerHTML = `<strong>${car1.info()}</strong>`;
+        }
+    </script>
+</body>
+
+</html>
