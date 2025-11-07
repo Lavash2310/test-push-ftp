@@ -25,7 +25,8 @@ body {
     list-style: none;
     display: flex;
     gap: 20px;
-    transition: all 0.4s ease;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-links li a {
@@ -255,59 +256,63 @@ button:hover {
     }
 }
 
-.menu-icon {
-    display: block;
-}
+@media screen and (max-width: 768px) {
 
-.nav-links {
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    width: 180px;
-    background-color: #464c54;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transform: translateY(-20px);
-    pointer-events: none;
-    z-index: 1000;
-}
+    .menu-icon {
+        display: block;
+    }
 
-.nav-links.active {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        width: 180px;
+        background-color: #464c54;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transform: translateY(-20px);
+        pointer-events: none;
+        transition: all 0.4s ease;
+        z-index: 1000;
+    }
 
-.nav-links li {
-    width: 100%;
-    padding: 8px 0;
-}
+    .nav-links.active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
 
-.nav-links li a {
-    display: block;
-    width: 100%;
-}
+    .nav-links li {
+        width: 100%;
+        padding: 8px 0;
+    }
 
-.modal-content {
-    width: 90%;
-    margin: 40% auto;
-    padding: 15px;
-    font-size: 14px;
-}
+    .nav-links li a {
+        display: block;
+        width: 100%;
+    }
 
-.modal-content h3 {
-    font-size: 18px;
-}
+    .modal-content {
+        width: 90%;
+        margin: 40% auto;
+        padding: 15px;
+        font-size: 14px;
+    }
 
-.modal-content p {
-    font-size: 14px;
-}
+    .modal-content h3 {
+        font-size: 18px;
+    }
 
-.close {
-    top: 5px;
-    right: 10px;
-    font-size: 22px;
+    .modal-content p {
+        font-size: 14px;
+    }
+
+    .close {
+        top: 5px;
+        right: 10px;
+        font-size: 22px;
+    }
 }
