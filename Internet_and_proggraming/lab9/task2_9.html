@@ -129,48 +129,48 @@
         style.textContent = `
             @keyframes letterAppear {
                 0% {
-                opacity: 0;
-                transform: translateY(-30px) rotate(-10deg);
+                    opacity: 0;
+                    transform: translateY(-30px) rotate(-10deg);
                 }
                 100% {
-                opacity: 1;
-                transform: translateY(0) rotate(0deg);
+                    opacity: 1;
+                    transform: translateY(0) rotate(0deg);
                 }
             }
 
             @keyframes letterDisappear {
                 0% {
-                opacity: 1;
-                transform: translateY(0) rotate(0deg) scale(1);
+                    opacity: 1;
+                    transform: translateY(0) rotate(0deg) scale(1);
                 }
                 100% {
-                opacity: 0;
-                transform: translateY(20px) rotate(10deg) scale(0.5);
+                    opacity: 0;
+                    transform: translateY(20px) rotate(10deg) scale(0.5);
                 }
             }
 
             @keyframes wordAppear {
                 0% {
-                opacity: 0;
-                transform: scale(0.5) rotate(-5deg);
+                    opacity: 0;
+                    transform: scale(0.5) rotate(-5deg);
                 }
                 100% {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
+                    opacity: 1;
+                    transform: scale(1) rotate(0deg);
                 }
             }
 
             @keyframes wordDisappear {
                 0% {
-                opacity: 1;
-                transform: scale(1);
+                    opacity: 1;
+                    transform: scale(1);
                 }
                 100% {
-                opacity: 0;
-                transform: scale(0) rotate(180deg);
+                    opacity: 0;
+                    transform: scale(0) rotate(180deg);
                 }
             }
-            `;
+        `;
         document.head.appendChild(style);
     </script>
 </body>
