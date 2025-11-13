@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 9</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2><a href="./lab9.html">Назад до меню меню лаборатної роботи</a></h2>
+    <div id="bg">
+        <h2>Приклад 1</h2>
+        <img id="train" src="https://js.cx/clipart/train.gif">
+
+        <h2>Приклад 2</h2>
+        <progress id="elem"></progress>
+
+        <h2>Приклад 3</h2>
+        <div id="path">
+            <div id="brick"></div>
+        </div>
+
+        <h2>Приклад 4</h2>
+        <div id="path1">
+            <div id="brick1"></div>
+        </div>
+
+        <h2>Приклад 5</h2>
+        <textarea id="textExample" rows="5" cols="60">He took his vorpal sword in hand:
+        Long time the manxome foe he sought—
+        So rested he by the Tumtum tree,
+        And stood awhile in thought.
+        </textarea>
+        <button onclick="animateText(textExample)">Run the animated typing!</button>
+
+        <h2>Приклад 6</h2>
+        <div id="field">
+            <img src="https://en.js.cx/clipart/ball.svg" width="40" height="40" id="ball">
+        </div>
+
+        <h2>Приклад 7</h2>
+        <div id="field1">
+            <img src="https://js.cx/clipart/ball.svg" width="40" height="40" id="ball1">
+        </div>
+    </div>
+
+
+    <script>
+        train.onclick = function () {
+            let start = Date.now();
+
+            let timer = setInterval(function () {
+                let timePassed = Date.now() - start;
+
+                train.style.left = timePassed / 5 + 'px';
+
+                if (timePassed > 2000) clearInterval(timer);
+
+            }, 20);
+        }
+
+        function animate(options) {
+
+            var start = performance.now();
+
+            requestAnimationFrame(function animate(time) {
+                var timeFraction = (time - start) / options.duration;
+                if (timeFraction > 1) timeFraction = 1;
+
+                var progress = options.timing(timeFraction)
+
+                options.draw(progress);
+
+                if (timeFraction < 1) {
+                    requestAnimationFrame(animate);
+                }
+
+            });
+        }
+
+        elem.onclick = function () {
+            animate({
+                duration: 1000,
+                timing: function (timeFraction) {
+                    return timeFraction;
+                },
+                draw: function (progress) {
+                    elem.style.width = progress * 100 + '%';
+                }
+            });
+        };
+
+        function makeEaseOut(timing) {
+            return function (timeFraction) {
+                return 1 - timing(1 - timeFraction);
+            }
+        }
+
+        function makeEaseInOut(timing) {
+            return function (timeFraction) {
+                if (timeFraction < .5)
+                    return timing(2 * timeFraction) / 2;
+                else
+                    return (2 - timing(2 * (1 - timeFraction))) / 2;
+            }
+        }
+
+        function bounce(timeFraction) {
+            for (let a = 0, b = 1; 1; a += b, b /= 2) {
+                if (timeFraction >= (7 - 4 * a) / 11) {
+                    return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+                }
+            }
+        }
+
+        let bounceEaseOut = makeEaseOut(bounce);
+        let bounceEaseInOut = makeEaseInOut(bounce);
+
+        brick.onclick = function () {
+            animate({
+                duration: 3000,
+                timing: bounceEaseOut,
+                draw: function (progress) {
+                    brick.style.left = progress * 500 + 'px';
+                }
+            });
+        };
+
+        brick1.onclick = function () {
+            animate({
+                duration: 3000,
+                timing: bounceEaseInOut,
+                draw: function (progress) {
+                    brick1.style.left = progress * 500 + 'px';
+                }
+            });
+        };
+
+        function animateText(textArea) {
+            let text = textArea.value;
+            let to = text.length,
+                from = 0;
+
+            animate({
+                duration: 5000,
+                timing: bounce,
+                draw: function (progress) {
+                    let result = (to - from) * progress + from;
+                    textArea.value = text.slice(0, Math.ceil(result))
+                }
+            });
+        }
+
+        ball.onclick = function () {
+
+            let to = field.clientHeight - ball.clientHeight;
+
+            animate({
+                duration: 2000,
+                timing: makeEaseOut(bounce),
+                draw(progress) {
+                    ball.style.top = to * progress + 'px'
+                }
+            });
+        };
+
+        function quad(timeFraction) {
+            return Math.pow(timeFraction, 2);
+        }
+
+        ball1.onclick = function () {
+
+            let height = field1.clientHeight - ball1.clientHeight;
+            let width = 100;
+
+            animate({
+                duration: 2000,
+                timing: makeEaseOut(bounce),
+                draw: function (progress) {
+                    ball1.style.top = height * progress + 'px'
+                }
+            });
+
+            animate({
+                duration: 2000,
+                timing: makeEaseOut(quad),
+                draw: function (progress) {
+                    ball1.style.left = width * progress + "px"
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

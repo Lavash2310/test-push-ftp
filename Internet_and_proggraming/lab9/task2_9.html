@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота 9</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2><a href="./lab9.html">Назад до меню меню лаборатної роботи</a></h2>
+    <div id="app">
+        <div class="container">
+            <button id="toggleBtn" class="control-btn">СТАРТ</button>
+
+            <div class="logo-container">
+                <svg id="logoSvg" width="400" height="400" viewBox="0 0 400 400">
+                    <defs>
+                        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#0066ff;stop-opacity:1" />
+                        </linearGradient>
+                        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00cc66;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+
+                    <circle class="orbit" cx="200" cy="200" r="120" />
+
+                    <g id="gearGroup">
+                        <circle class="gear-center" cx="200" cy="200" r="40" fill="url(#gradient1)" />
+                        <path class="gear-tooth" d="M 200 160 L 210 150 L 190 150 Z" fill="url(#gradient1)" />
+                        <path class="gear-tooth" d="M 240 200 L 250 210 L 250 190 Z" fill="url(#gradient1)" />
+                        <path class="gear-tooth" d="M 200 240 L 210 250 L 190 250 Z" fill="url(#gradient1)" />
+                        <path class="gear-tooth" d="M 160 200 L 150 210 L 150 190 Z" fill="url(#gradient1)" />
+                    </g>
+
+                    <g id="codeSymbols">
+                        <text class="code-symbol bracket1" x="100" y="200" font-size="60">&lt;</text>
+                        <text class="code-symbol bracket2" x="270" y="200" font-size="60">&gt;</text>
+                        <text class="code-symbol slash" x="185" y="140" font-size="40">/</text>
+                    </g>
+
+                    <circle class="particle particle1" cx="200" cy="80" r="8" fill="url(#gradient2)" />
+                    <circle class="particle particle2" cx="320" cy="200" r="8" fill="url(#gradient2)" />
+                    <circle class="particle particle3" cx="200" cy="320" r="8" fill="url(#gradient2)" />
+                    <circle class="particle particle4" cx="80" cy="200" r="8" fill="url(#gradient2)" />
+                </svg>
+
+                <div class="text-container">
+                    <h1 class="main-title">
+                        <span class="letter">І</span>
+                        <span class="letter">н</span>
+                        <span class="letter">ж</span>
+                        <span class="letter">е</span>
+                        <span class="letter">н</span>
+                        <span class="letter">е</span>
+                        <span class="letter">р</span>
+                        <span class="letter">і</span>
+                        <span class="letter">я</span>
+                    </h1>
+                    <h2 class="subtitle">
+                        <span class="word">програмного</span>
+                        <span class="word">забезпечення</span>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let isAnimating = false;
+
+        const toggleBtn = document.getElementById('toggleBtn');
+        const logoSvg = document.getElementById('logoSvg');
+        const letters = document.querySelectorAll('.letter');
+        const words = document.querySelectorAll('.word');
+
+        toggleBtn.addEventListener('click', () => {
+            isAnimating = !isAnimating;
+
+            if (isAnimating) {
+                startAnimation();
+                toggleBtn.textContent = 'СТОП';
+                toggleBtn.style.background = 'linear-gradient(135deg, #ff6b00, #ff0066)';
+            } else {
+                stopAnimation();
+                toggleBtn.textContent = 'СТАРТ';
+                toggleBtn.style.background = 'linear-gradient(135deg, #00d4ff, #0066ff)';
+            }
+        });
+
+        function startAnimation() {
+            logoSvg.classList.add('animated');
+
+            letters.forEach((letter, index) => {
+                setTimeout(() => {
+                    letter.style.animation = `letterAppear 0.5s ease-out forwards`;
+                    letter.style.animationDelay = `${index * 0.1}s`;
+                }, index * 100);
+            });
+
+            words.forEach((word, index) => {
+                setTimeout(() => {
+                    word.style.animation = `wordAppear 0.8s ease-out forwards`;
+                    word.style.animationDelay = `${index * 0.3}s`;
+                }, 1000 + index * 300);
+            });
+        }
+
+        function stopAnimation() {
+            logoSvg.classList.remove('animated');
+
+            letters.forEach((letter, index) => {
+                setTimeout(() => {
+                    letter.style.animation = `letterDisappear 0.3s ease-out forwards`;
+                }, index * 50);
+            });
+
+            words.forEach((word, index) => {
+                setTimeout(() => {
+                    word.style.animation = `wordDisappear 0.5s ease-out forwards`;
+                }, index * 200);
+            });
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes letterAppear {
+                0% {
+                opacity: 0;
+                transform: translateY(-30px) rotate(-10deg);
+                }
+                100% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+                }
+            }
+
+            @keyframes letterDisappear {
+                0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg) scale(1);
+                }
+                100% {
+                opacity: 0;
+                transform: translateY(20px) rotate(10deg) scale(0.5);
+                }
+            }
+
+            @keyframes wordAppear {
+                0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-5deg);
+                }
+                100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+                }
+            }
+
+            @keyframes wordDisappear {
+                0% {
+                opacity: 1;
+                transform: scale(1);
+                }
+                100% {
+                opacity: 0;
+                transform: scale(0) rotate(180deg);
+                }
+            }
+            `;
+        document.head.appendChild(style);
+    </script>
+</body>
+
+</html>
