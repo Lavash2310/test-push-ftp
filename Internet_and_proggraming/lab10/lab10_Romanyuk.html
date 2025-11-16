@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1</title>
+    <script type="text/javascript" src="jquery-3.7.1.min"></script>
+    <script src="jquery-3.7.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            var $text = $('#hide_text');
+            $text.hide();
+            $('.button').click(function () {
+                $text.show(200);
+            });
+        }); 
+    </script>
+</head>
+
+<body>
+    <h2><a href="./lab10.html">Назад до меню меню лаборатної роботи</a></h2>
+    <H1> Контент сторінки </h1>
+    <a href="#" class="button"> Натисніть, щоб показати текст </a>
+    <div id="hide_text"> Демонстраційний прихований текст </div>
+</body>
+
+</html>

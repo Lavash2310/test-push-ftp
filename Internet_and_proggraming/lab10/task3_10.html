@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 3</title>
+    <script type="text/javascript" src="jquery-3.7.1.min"></script>
+    <script src="jquery-3.7.1.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        $(document).ready(function () {
+            $('.click-div').bind('click', function () {
+                $(this).addClass('clicked-style');
+            });
+
+            $('.click-div').bind('dblclick', function () {
+                $(this).removeClass('clicked-style');
+            });
+
+
+            $('.btn-single').bind('click', function () {
+                alert('Одинарний клік');
+            });
+
+            $('.btn-double').bind('dblclick', function () {
+                alert('Подвійний клік');
+            });
+
+
+            $('.show-image-link').click(function (e) {
+                e.preventDefault();
+                $('#image-container').fadeIn(500);
+                $(this).fadeOut(300);
+            });
+
+            $('#demo-image').click(function () {
+                $('#image-container').fadeOut(500);
+                $('.show-image-link').fadeIn(300);
+            });
+
+            $('#demo-image').bind('mouseover', function (e) {
+                var tooltip = $('<div class="image-tooltip">Красивий пейзаж природи</div>');
+                $('body').append(tooltip);
+                tooltip.css({
+                    'top': e.pageY + 10 + 'px',
+                    'left': e.pageX + 10 + 'px'
+                }).fadeIn(200);
+            });
+
+            $('#demo-image').bind('mouseout', function () {
+                $('.image-tooltip').fadeOut(200, function () {
+                    $(this).remove();
+                });
+            });
+
+            $('#demo-image').mousemove(function (e) {
+                $('.image-tooltip').css({
+                    'top': e.pageY + 10 + 'px',
+                    'left': e.pageX + 10 + 'px'
+                });
+            });
+
+
+            $("form").submit(function (e) {
+                e.preventDefault();
+
+                if ($("input:first").val() == "correct") {
+                    $("span").text("Перевіряєм...").removeClass('error-message').addClass('checking-message').show();
+                    setTimeout(function () {
+                        alert('Успішно!');
+                        $("span").hide();
+                        $("input:first").val('');
+                    }, 1000);
+                    return false;
+                }
+
+                $("span").text("Неправильно!").removeClass('checking-message').addClass('error-message').show().fadeOut(2000);
+                return false;
+            });
+        }); 
+    </script>
+</head>
+
+<body>
+    <h2><a href="./lab10.html">Назад до меню меню лаборатної роботи</a></h2>
+    <section>
+        <h2>Завдання 3.1 - Одинарний і подвійний клік</h2>
+        <p><strong>Інструкція:</strong> Клікніть один раз на блок нижче для додавання стилю. Зробіть подвійний клік для
+            повернення до початкового вигляду.</p>
+        <div class="click-div">
+            Клікніть на мене один раз для додавання рамки і заливки.<br>
+            Зробіть подвійний клік для повернення до початкового стану.
+        </div>
+    </section>
+
+    <section>
+        <h2>Завдання 3.2 - Кнопки з повідомленнями</h2>
+        <p><strong>Інструкція:</strong> Клікніть на зелену кнопку один раз, а на помаранчеву - двічі.</p>
+        <div class="task-buttons">
+            <button class="btn-single">Кнопка для одинарного кліку</button>
+            <button class="btn-double">Кнопка для подвійного кліку</button>
+        </div>
+    </section>
+
+    <section>
+        <h2>Завдання 3.3 - Показати/сховати зображення</h2>
+        <p><strong>Інструкція:</strong> Клікніть на напис для показу зображення. Наведіть курсор на зображення для
+            підказки. Клікніть на зображення для його приховання.</p>
+        <div class="image-section">
+            <a href="#" class="show-image-link">Показати зображення</a>
+            <div id="image-container">
+                <img id="demo-image" src="img/landscape.jpg" alt="Пейзаж">
+            </div>
+        </div>
+    </section>
+
+    <section class="form-section">
+        <h2>Завдання 3.4 - Перевірка форми</h2>
+        <p>Введіть в текстове поле слово 'correct'.</p>
+        <form>
+            <div>
+                <input type="text" placeholder="Введіть слово..." />
+                <input type="submit" value="Перевірити" />
+            </div>
+        </form>
+        <span></span>
+    </section>
+</body>
+
+</html>

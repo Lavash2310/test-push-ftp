@@ -1,0 +1,213 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+h1,
+h2 {
+    color: #333;
+}
+
+p {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+#hide_text {
+    padding: 15px;
+    margin: 20px 0;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+.hover-style {
+    background-color: #ffeb3b !important;
+    border: 2px solid #fbc02d !important;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Завдання 3.1 - Стилі для div з кліком */
+.click-div {
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.clicked-style {
+    background-color: #e3f2fd !important;
+    border: 3px solid #2196f3 !important;
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+}
+
+/* Завдання 3.2 - Кнопки */
+.task-buttons {
+    margin: 20px 0;
+}
+
+.task-buttons button {
+    padding: 12px 24px;
+    margin: 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-single {
+    background-color: #4caf50;
+    color: white;
+}
+
+.btn-single:hover {
+    background-color: #45a049;
+}
+
+.btn-double {
+    background-color: #ff9800;
+    color: white;
+}
+
+.btn-double:hover {
+    background-color: #e68900;
+}
+
+/* Завдання 3.3 - Зображення */
+.image-section {
+    margin: 20px 0;
+}
+
+.show-image-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #9c27b0;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.show-image-link:hover {
+    background-color: #7b1fa2;
+}
+
+#image-container {
+    margin: 20px 0;
+    display: none;
+}
+
+#demo-image {
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#demo-image:hover {
+    transform: scale(1.05);
+}
+
+.image-tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: none;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Завдання 3.4 - Форма */
+.form-section {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    margin: 15px 0;
+}
+
+form div {
+    margin: 10px 0;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    width: 250px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+input[type="submit"]:hover {
+    background-color: #1976d2;
+}
+
+span {
+    display: block;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.checking-message {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+section {
+    margin: 30px 0;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
